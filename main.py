@@ -63,4 +63,6 @@ while running:
     player.bullets.draw(display)
     enemy_spawner.enemy_group.draw(display)
     particle_spawner.particle_group.draw(display)
+    player.hud_group.draw(display)
+    player.hud.health_bar_group.draw(display)
     pygame.display.update()

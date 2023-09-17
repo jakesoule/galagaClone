@@ -1,6 +1,7 @@
 import pygame
 import constants as c
 from bullet import Bullet
+from hud import HUD
 
 class Ship(pygame.sprite.Sprite):
     def __init__(self):
@@ -9,9 +10,12 @@ class Ship(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (self.image.get_width()*3, self.image.get_height()*3))
         self.rect = self.image.get_rect()
         self.rect.x = c.DISPLAY_WIDTH // 2
-        self.rect.y = c.DISPLAY_HEIGHT - self.rect.height * 2
+        self.rect.y = c.DISPLAY_HEIGHT - self.rect.height * 2 - 5
         self.bullets = pygame.sprite.Group()
         self.snd_shoot = pygame.mixer.Sound('.\\sound_fx\\sounds\\Fire 1.ogg')
+        self.hud = HUD()
+        self.hud_group = pygame.sprite.Group()
+        self.hud_group.add(self.hud)
         self.vel_x = 0
         self.vel_y = 0
         self.speed = 5
@@ -19,6 +23,7 @@ class Ship(pygame.sprite.Sprite):
     
     def update(self):
         self.reload += 1
+        self.hud_group.update()
         self.bullets.update()
         for bullet in self.bullets:
             if bullet.rect.y <= 0:
