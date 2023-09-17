@@ -6,6 +6,7 @@ from enemy_spawner import EnemySpawner
 from particle_spawner import ParticleSpawner
 from event_handler import EventHandler
 
+
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 pygame.mixer.init()
