@@ -24,11 +24,13 @@ class Enemy(pygame.sprite.Sprite):
             self.img_explosion_05
         ]
         self.anim_index = 0
-        self.frame_length = 3
+        self.frame_length_max = 8
+        self.frame_length = self.frame_length_max
 
         self.image = pygame.image.load('.\\spaceships\\ships\\blue.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.image.get_width()*3, self.image.get_height()*3))
         self.is_destroyed = False
+        self.is_invincible = False
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(0, c.DISPLAY_WIDTH - self.rect.width)
         self.rect.y = -self.rect.height
@@ -43,21 +45,25 @@ class Enemy(pygame.sprite.Sprite):
 
         if self.is_destroyed:
             max_index = len(self.anim_explosion) - 1
-            if self.anim_index > max_index:
-                self.kill()
-            else:
-                if self.frame_length == 0:
-                    self.image = self.anim_explosion[self.anim_index]
-                    self.anim_index += 1
-                    self.frame_length = random.randrange(1,6)
+            if self.frame_length == 0:
+                self.anim_index += 1
+                if self.anim_index > max_index:
+                    self.kill()
                 else:
+                    self.image = self.anim_explosion[self.anim_index]
+                    self.frame_length = self.frame_length_max
+            else:
                     self.frame_length -= 1
-        
+            
     def get_hit(self):
-        self.hp -= 1
-        self.snd_hit.play()
-        if self.hp <= 0:
-            self.is_destroyed = True
-            self.rect.x = self.rect.x - 35
-            self.rect.y = self.rect.y - 35
-            self.image = self.anim_explosion[self.anim_index]
+        if not self.is_invincible:
+            self.hp -= 1
+            self.snd_hit.play()
+            if self.hp <= 0:
+                self.is_invincible = True
+                self.is_destroyed = True
+                self.rect.x = self.rect.x - 20
+                self.rect.y = self.rect.y - 20
+                self.image = self.anim_explosion[self.anim_index]
+        else:
+            pass
