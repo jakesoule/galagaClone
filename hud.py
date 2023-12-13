@@ -3,7 +3,7 @@ import constants as c
 from health import HealthBar
 
 class HUD(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, hp):
         super(HUD, self).__init__()
         self.image = pygame.image.load('.\\hud\\hud_bar.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (c.DISPLAY_WIDTH, self.image.get_height()*1.3))
@@ -12,7 +12,7 @@ class HUD(pygame.sprite.Sprite):
         self.rect.y = c.DISPLAY_HEIGHT - self.rect.height
         self.vel_x = 0
         self.vel_y = 0
-        self.health_bar = HealthBar()
+        self.health_bar = HealthBar(hp)
         self.health_bar.rect.x = 10
         self.health_bar.rect.y = c.DISPLAY_HEIGHT - self.health_bar.rect.height - 30
         self.health_bar_group = pygame.sprite.Group()

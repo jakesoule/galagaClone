@@ -54,7 +54,15 @@ while running:
     collided = pygame.sprite.groupcollide(player.bullets, enemy_spawner.enemy_group, True, False)
     for bullet, enemy in collided.items():
         enemy[0].get_hit()
-        particle_spawner.spawn_particles((bullet.rect.x, bullet.rect.y))
+        if not enemy[0].is_invincible:
+            particle_spawner.spawn_particles((bullet.rect.x, bullet.rect.y))
+    collided = pygame.sprite.groupcollide(sprite_group, enemy_spawner.enemy_group, False, False)
+    for player, enemy in collided.items():
+        if not enemy[0].is_invincible:
+            player.get_hit()
+        enemy[0].hp = 0
+        enemy[0].get_hit()
+
 
 
     #render display

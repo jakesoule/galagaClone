@@ -23,6 +23,7 @@ class Enemy(pygame.sprite.Sprite):
             self.img_explosion_04,
             self.img_explosion_05
         ]
+
         self.anim_index = 0
         self.frame_length_max = 8
         self.frame_length = self.frame_length_max
@@ -62,6 +63,8 @@ class Enemy(pygame.sprite.Sprite):
             if self.hp <= 0:
                 self.is_invincible = True
                 self.is_destroyed = True
+                self.vel_y = 0
+                self.vel_x = 0
                 self.rect.x = self.rect.x - 20
                 self.rect.y = self.rect.y - 20
                 self.image = self.anim_explosion[self.anim_index]
