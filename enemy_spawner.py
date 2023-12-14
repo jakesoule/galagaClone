@@ -1,5 +1,6 @@
 import pygame
 from enemy import Enemy
+from enemy_2 import Enemy2
 import random
 import constants as c
 
@@ -20,5 +21,14 @@ class EnemySpawner:
             self.spawn_timer -= 1
 
     def spawn_enemy(self):
-        new_enemy = Enemy()
+        random_number = random.randrange(0, 100)
+        if random_number <= 75:
+            new_enemy = Enemy()
+        elif random_number >= 76:
+            new_enemy = Enemy2()
+
         self.enemy_group.add(new_enemy)
+
+    def clear_enemies(self):
+        for enemy in self.enemy_group:
+            enemy.kill()

@@ -17,3 +17,9 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.vel_x
         self.rect.y += self.vel_y
+
+    def set_vel_y(self, y):
+        self.vel_y = y
+    
+    def transform(self, x, y):
+        self.image = pygame.transform.scale(self.image, (x, y))

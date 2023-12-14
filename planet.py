@@ -14,7 +14,13 @@ class Planet(pygame.sprite.Sprite):
         self.rect.y = 0 - self.rect.height
         self.vel_x = 0
         self.vel_y = random.randrange(1, 3)
+        self.movement_timer = random.randrange(1, 5)
+        self.movement_tracker = self.movement_timer
     
     def update(self):
-        self.rect.x += self.vel_x
-        self.rect.y += self.vel_y
+        self.movement_tracker -= 1
+        if self.movement_tracker == 0:
+            self.rect.y += 1
+            self.movement_tracker = self.movement_timer
+        if self.rect.y > c.DISPLAY_HEIGHT:
+            self.kill()

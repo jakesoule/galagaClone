@@ -23,6 +23,8 @@ class HUD(pygame.sprite.Sprite):
         self.score_group = pygame.sprite.Group()
         self.score_group.add(self.score)
         self.lives = Lives(num_lives)
+        self.lives.rect.x = 210
+        self.lives.rect.y = c.DISPLAY_HEIGHT - 45
         self.icons_group = pygame.sprite.Group()
         self.icons_group.add(self.lives)
 
