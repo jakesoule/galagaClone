@@ -1,5 +1,6 @@
 import pygame
 import constants as c
+import sys
 
 class EventHandler:
     def __init__(self):
@@ -20,8 +21,7 @@ class EventHandler:
     @staticmethod
     def check_quit_event(event):
         if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
+            sys.exit()
 
     def check_keyboard_event(self, event, actor):
         if event.type == pygame.KEYDOWN:
@@ -32,6 +32,7 @@ class EventHandler:
                 
             if event.key == pygame.K_SPACE:
                 actor.shoot()
+            
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
