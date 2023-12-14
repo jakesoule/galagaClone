@@ -10,6 +10,7 @@ from event_handler import EventHandler
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 pygame.mixer.init()
+pygame.font.init()
 
 #display setup
 display = pygame.display.set_mode(c.DISPLAY_SIZE) #variable for display size
@@ -54,13 +55,14 @@ while running:
     collided = pygame.sprite.groupcollide(player.bullets, enemy_spawner.enemy_group, True, False)
     for bullet, enemy in collided.items():
         enemy[0].get_hit()
+        player.hud.score.update_score(enemy[0].score_value)
         if not enemy[0].is_invincible:
             particle_spawner.spawn_particles((bullet.rect.x, bullet.rect.y))
     collided = pygame.sprite.groupcollide(sprite_group, enemy_spawner.enemy_group, False, False)
     for player, enemy in collided.items():
         if not enemy[0].is_invincible:
             player.get_hit()
-        enemy[0].hp = 0
+        enemy[0].hp = 0 
         enemy[0].get_hit()
 
 
@@ -73,5 +75,7 @@ while running:
     enemy_spawner.enemy_group.draw(display)
     particle_spawner.particle_group.draw(display)
     player.hud_group.draw(display)
+    player.hud.score_group.draw(display)
     player.hud.health_bar_group.draw(display)
+    player.hud.icons_group.draw(display)
     pygame.display.update()

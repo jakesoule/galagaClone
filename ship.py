@@ -15,11 +15,12 @@ class Ship(pygame.sprite.Sprite):
         self.snd_shoot = pygame.mixer.Sound('.\\sound_fx\\sounds\\Fire 1.ogg')
         self.max_hp = 3
         self.hp = self.max_hp
-        self.hud = HUD(self.hp)
+        self.lives = 3
+        self.hud = HUD(self.hp, self.lives)
         self.hud_group = pygame.sprite.Group()
         self.hud_group.add(self.hud)
         self.hp = 3
-        self.lives = 3
+
         self.vel_x = 0
         self.vel_y = 0
         self.speed = 5

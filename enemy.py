@@ -37,6 +37,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = -self.rect.height
         self.snd_hit = pygame.mixer.Sound('.\\sound_fx\\sounds\\Hit-1.ogg')
         self.hp = 3
+        self.score_value = 5
         self.vel_x = 0
         self.vel_y = random.randrange(3, 8)
 
